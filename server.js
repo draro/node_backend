@@ -25,12 +25,12 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send(database.users))
 
-app.post('/signin', (req, res) => signin.handleSignin(req, res, db, bcrypt))
+app.post('/signin', signin.handleSignin(db, bcrypt))
 
-app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt))
+app.post('/register', register.handleRegister(db, bcrypt))
 
-app.get('/profile/:id', (req, res) => profile.handleProfileGet(req, res, db))
-app.put('/image', (req, res) => profile.handleImage(req, res, db))
+app.get('/profile/:id', profile.handleProfileGet(db))
+app.put('/image', (req, res) => image.handleImage(req, res, db))
 
 app.listen(3001, () => {
     console.log('app is running on port 3001')
